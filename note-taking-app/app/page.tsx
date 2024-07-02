@@ -1,6 +1,6 @@
 "use client"
 
-import Note from "./components/note";
+import Note from "./note/page";
 
 export default function Home() {
   return (
