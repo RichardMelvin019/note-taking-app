@@ -1,6 +1,6 @@
 "use client"
 
-const Note = () => {
+const Note = ({ onAddNote }) => {
   return (
     <div>
       <div className="flex flex-row m-3 space-x-4 justify-center">
@@ -8,12 +8,13 @@ const Note = () => {
           type="text"
           id="title"
           placeholder="Title"
+          autoFocus
           className="input input-bordered input-primary w-96"
         />
         <textarea
           id="description"
           placeholder="Note Description"
-          className="textarea textarea-primary textarea-bordered textarea-xs w-96 "
+          className="textarea textarea-primary textarea-bordered textarea-xs w-96 text-balance"
         />
       </div>
       <div className="form-control">
@@ -27,7 +28,7 @@ const Note = () => {
           type="submit"
           id="submit"
           className="btn btn-outline btn-secondary m-2"
-          onClick={() => alert("Note successfully added")}
+          onClick={onAddNote}
         >
           Add Note
         </button>
