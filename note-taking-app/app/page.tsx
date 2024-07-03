@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react";
-import uuid from "react-uuid";
+// import uuid from "react-uuid";
 import Note from "./note/page";
 import NoteList from "./notelist/page";
 
@@ -15,17 +15,21 @@ interface Notes {
 export default function Home() {
 
   const [notes, setNotes] = useState<Notes[]>([]);
+  // const [newTitle, setNewTitle] = useState("Untitled Note");
+  // const [newDescription, setNewDescription] = useState("");
 
-  const onAddNote = () => {
-    const newNote = {
-      id: uuid(), // Creates a random unique id.
-      title: "Untitled",
-      description: "",
-      lastModified: Date.now(),
-    };
+  // const onAddNote = () => {
+  //   const newNote = {
+  //     id: uuid(), // Creates a random unique id.
+  //     title: newTitle,
+  //     description: newDescription,
+  //     lastModified: Date.now(),
+  //   };
 
-    setNotes([newNote, ...notes]); // Adds the new note to the notes array (By spreading the elements inside notes).
-  };
+  //   setNotes([...notes, newNote]); // Adds the new note to the notes array (By spreading the elements inside notes).
+  //   setNewTitle("");
+  //   setNewDescription("");
+  // };
 
   const onDeleteNote  = (idToDelete: string) => {
     // Filters out the note with the provided id.
@@ -37,7 +41,7 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center m-20">
       <div className="font-mono">Note Taking App</div>
-      <Note onAddNote={onAddNote} />
+      <Note notes={notes} setNotes={setNotes} />
       <div className="divider divider-secondary mb-7">Notes</div>
       <div className="mt-5">
         <NoteList notes={notes} onDeleteNote={onDeleteNote} />
