@@ -15,21 +15,6 @@ interface Notes {
 export default function Home() {
 
   const [notes, setNotes] = useState<Notes[]>([]);
-  // const [newTitle, setNewTitle] = useState("Untitled Note");
-  // const [newDescription, setNewDescription] = useState("");
-
-  // const onAddNote = () => {
-  //   const newNote = {
-  //     id: uuid(), // Creates a random unique id.
-  //     title: newTitle,
-  //     description: newDescription,
-  //     lastModified: Date.now(),
-  //   };
-
-  //   setNotes([...notes, newNote]); // Adds the new note to the notes array (By spreading the elements inside notes).
-  //   setNewTitle("");
-  //   setNewDescription("");
-  // };
 
   const onDeleteNote  = (idToDelete: string) => {
     // Filters out the note with the provided id.
