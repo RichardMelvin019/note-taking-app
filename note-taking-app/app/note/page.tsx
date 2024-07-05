@@ -1,17 +1,16 @@
-"use client"
+"use client";
 
 import { useState } from "react";
 import uuid from "react-uuid";
 
-const Note = ({ notes, setNotes }) => {
-
+const Note = ({ notes, setNotes, activeNote }) => {
   const [newTitle, setNewTitle] = useState("");
   const [newDescription, setNewDescription] = useState("");
 
   const onAddNote = () => {
     const newNote = {
       id: uuid(), // Creates a random unique id.
-      title : newTitle || "Untitled Note", // if user did not provide a title set the title to "Untitled Note"
+      title: newTitle || "Untitled Note", // if user did not provide a title set the title to "Untitled Note"
       description: newDescription,
       lastModified: Date.now(),
     };
@@ -43,19 +42,34 @@ const Note = ({ notes, setNotes }) => {
       </div>
       <div className="form-control">
         <label className="cursor-pointer space-x-4">
-          <input type="checkbox" id="important" className="checkbox checkbox-secondary" />
+          <input
+            type="checkbox"
+            id="important"
+            className="checkbox checkbox-secondary"
+          />
           <span className="label-text">Mark as Important</span>
         </label>
       </div>
       <div className="flex flex-row justify-center">
-        <button
-          type="submit"
-          id="submit"
-          className="btn btn-outline btn-secondary m-2"
-          onClick={onAddNote}
-        >
-          Add Note
-        </button>
+        {!activeNote ? (
+          <button
+            type="submit"
+            id="submit"
+            className="btn btn-outline btn-secondary m-2"
+            onClick={onAddNote}
+          >
+            Add Note
+          </button>
+        ) : (
+          <button
+            type="submit"
+            id="submit"
+            className="btn btn-primary m-2"
+            // onClick={}
+          >
+            Update
+          </button>
+        )}
       </div>
     </div>
   );
