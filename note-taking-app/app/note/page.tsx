@@ -1,8 +1,5 @@
 "use client";
 
-// import { useState } from "react";
-// import uuid from "react-uuid";
-
 const Note = ({
   activeNote,
   onAddNote,
@@ -13,21 +10,6 @@ const Note = ({
   newImportant,
   setNewImportant
 }) => {
-  // const [newTitle, setNewTitle] = useState("");
-  // const [newDescription, setNewDescription] = useState("");
-
-  // const onAddNote = () => {
-  //   const newNote = {
-  //     id: uuid(), // Creates a random unique id.
-  //     title: newTitle || "Untitled Note", // if user did not provide a title set the title to "Untitled Note"
-  //     description: newDescription,
-  //     lastModified: Date.now(),
-  //   };
-
-  //   setNotes([...notes, newNote]); // Adds the new note to the notes array (By spreading the elements inside notes).
-  //   setNewTitle("");
-  //   setNewDescription("");
-  // };
 
   return (
     <div>

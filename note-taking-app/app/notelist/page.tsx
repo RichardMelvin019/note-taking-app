@@ -2,14 +2,6 @@
 
 import { HiStar, HiTrash, HiPencilSquare } from "react-icons/hi2";
 
-interface Note {
-  id: string;
-  title: string;
-  description: string;
-  lastModified: number;
-  important: boolean;
-}
-
 const NoteList = ({
   notes,
   onDeleteNote,
@@ -17,23 +9,7 @@ const NoteList = ({
   setActiveNote,
   onMarkImportant,
 }) => {
-  // get mevin notes from the local storage
-  // const melvinNotesFromStorage = localStorage.getItem("melvinNotes");
-  // let melvinNotes: Note[] = [];
-
-  // try {
-  //   // if null, means it is a new user or storage was cleared
-  //   // so set storage, else parse the notes list
-  //   if (melvinNotesFromStorage === null) {
-  //     localStorage.setItem("melvinNotes", JSON.stringify([]));
-  //   } else {
-  //     melvinNotes = JSON.parse(melvinNotesFromStorage);
-  //   }
-  // } catch {
-  //   localStorage.clear();
-  //   melvinNotes = [];
-  // }
-
+  
   return (
     <div className="grid grid-cols-3 gap-4 justify-normal">
       {notes.map((note) => (
