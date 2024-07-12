@@ -60,9 +60,24 @@ export default function Home() {
     setNotes(deleteNotes); // Updates the notes array.
   };
 
-  const getActiveNote = () => {
-    return notes.find((note) => note.id === activeNote);
-  };
+  const handleUpdateNote = (id, updatedTitle,
+    updatedDescription, updatedImportant) => {
+    const updatedNotes = notes.map((note) =>
+        note.id === id ? {
+            ...note,
+            title: updatedTitle,
+            description: updatedDescription,
+            important: updatedImportant
+        }
+            : note
+    );
+    setNotes(updatedNotes);
+    setActiveNote(null);
+    setNewTitle('');
+    setNewDescription('');
+    setNewImportant(false);
+};
+
 
   return (
     <main className="flex flex-col items-center m-20">
@@ -70,7 +85,8 @@ export default function Home() {
       <Note
         newImportant={newImportant}
         setNewImportant={setNewImportant}
-        activeNote={getActiveNote()}
+        activeNote={activeNote}
+        handleUpdateNote={handleUpdateNote}
         onAddNote={onAddNote}
         newTitle={newTitle}
         setNewTitle={setNewTitle}

@@ -8,7 +8,8 @@ const Note = ({
   setNewDescription,
   newDescription,
   newImportant,
-  setNewImportant
+  setNewImportant,
+  handleUpdateNote
 }) => {
 
   return (
@@ -58,7 +59,7 @@ const Note = ({
             type="submit"
             id="submit"
             className="btn btn-success m-2"
-            // onClick={}
+            onClick={() => handleUpdateNote(activeNote, newTitle, newDescription, newImportant)}
           >
             Update
           </button>
