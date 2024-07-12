@@ -1,24 +1,33 @@
 "use client";
 
-import { useState } from "react";
-import uuid from "react-uuid";
+// import { useState } from "react";
+// import uuid from "react-uuid";
 
-const Note = ({ notes, setNotes, activeNote }) => {
-  const [newTitle, setNewTitle] = useState("");
-  const [newDescription, setNewDescription] = useState("");
+const Note = ({
+  activeNote,
+  onAddNote,
+  newTitle,
+  setNewTitle,
+  setNewDescription,
+  newDescription,
+  newImportant,
+  setNewImportant
+}) => {
+  // const [newTitle, setNewTitle] = useState("");
+  // const [newDescription, setNewDescription] = useState("");
 
-  const onAddNote = () => {
-    const newNote = {
-      id: uuid(), // Creates a random unique id.
-      title: newTitle || "Untitled Note", // if user did not provide a title set the title to "Untitled Note"
-      description: newDescription,
-      lastModified: Date.now(),
-    };
+  // const onAddNote = () => {
+  //   const newNote = {
+  //     id: uuid(), // Creates a random unique id.
+  //     title: newTitle || "Untitled Note", // if user did not provide a title set the title to "Untitled Note"
+  //     description: newDescription,
+  //     lastModified: Date.now(),
+  //   };
 
-    setNotes([...notes, newNote]); // Adds the new note to the notes array (By spreading the elements inside notes).
-    setNewTitle("");
-    setNewDescription("");
-  };
+  //   setNotes([...notes, newNote]); // Adds the new note to the notes array (By spreading the elements inside notes).
+  //   setNewTitle("");
+  //   setNewDescription("");
+  // };
 
   return (
     <div>
@@ -45,6 +54,8 @@ const Note = ({ notes, setNotes, activeNote }) => {
           <input
             type="checkbox"
             id="important"
+            checked={newImportant}
+            onChange={(e) => setNewImportant(e.target.checked)}
             className="checkbox checkbox-secondary"
           />
           <span className="label-text">Mark as Important</span>
@@ -64,7 +75,7 @@ const Note = ({ notes, setNotes, activeNote }) => {
           <button
             type="submit"
             id="submit"
-            className="btn btn-primary m-2"
+            className="btn btn-success m-2"
             // onClick={}
           >
             Update

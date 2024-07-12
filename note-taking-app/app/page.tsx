@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-// import uuid from "react-uuid";
+import uuid from "react-uuid";
 import Note from "./note/page";
 import NoteList from "./notelist/page";
 
@@ -10,11 +10,44 @@ interface Notes {
   title: string;
   description: string;
   lastModified: number;
+  important: boolean;
 }
 
 export default function Home() {
   const [notes, setNotes] = useState<Notes[]>([]);
-  const [activeNote, setActiveNote] = useState(false);
+  const [activeNote, setActiveNote] = useState(null);
+
+  const [newTitle, setNewTitle] = useState("");
+  const [newDescription, setNewDescription] = useState("");
+  const [newImportant, setNewImportant] = useState(false);
+
+  const onAddNote = () => {
+    const newNote = {
+      id: uuid(), // Creates a random unique id.
+      title: newTitle || "Untitled Note", // if user did not provide a title set the title to "Untitled Note"
+      description: newDescription,
+      important: newImportant,
+      lastModified: Date.now(),
+    };
+
+    setNotes([...notes, newNote]); // Adds the new note to the notes array (By spreading the elements inside notes).
+    setNewTitle("");
+    setNewDescription("");
+    setNewImportant(false);
+  };
+
+  const onMarkImportant = (id: string) => {
+    setNotes(
+      notes.map((note) =>
+        note.id === id
+          ? {
+              ...note,
+              important: !note.important,
+            }
+          : note
+      )
+    );
+  };
 
   const onDeleteNote = (idToDelete: string) => {
     // Filters out the note with the provided id.
@@ -23,13 +56,27 @@ export default function Home() {
     setNotes(deleteNotes); // Updates the notes array.
   };
 
+  const getActiveNote = () => {
+    return notes.find((note) => note.id === activeNote);
+  };
+
   return (
     <main className="flex flex-col items-center m-20">
       <div className="font-mono">Note Taking App</div>
-      <Note notes={notes} setNotes={setNotes} activeNote={activeNote} />
+      <Note
+        newImportant={newImportant}
+        setNewImportant={setNewImportant}
+        activeNote={getActiveNote()}
+        onAddNote={onAddNote}
+        newTitle={newTitle}
+        setNewTitle={setNewTitle}
+        newDescription={newDescription}
+        setNewDescription={setNewDescription}
+      />
       <div className="divider divider-secondary mb-7">Notes</div>
       <div className="mt-5">
         <NoteList
+          onMarkImportant={onMarkImportant}
           notes={notes}
           onDeleteNote={onDeleteNote}
           activeNote={activeNote}
