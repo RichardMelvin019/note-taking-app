@@ -2,17 +2,48 @@
 
 import { HiStar, HiTrash, HiPencilSquare } from "react-icons/hi2";
 
-const NoteList = ({ notes, onDeleteNote, activeNote, setActiveNote, onMarkImportant }) => {
+interface Note {
+  id: string;
+  title: string;
+  description: string;
+  lastModified: number;
+  important: boolean;
+}
+
+const NoteList = ({
+  notes,
+  onDeleteNote,
+  activeNote,
+  setActiveNote,
+  onMarkImportant,
+}) => {
+  // get mevin notes from the local storage
+  // const melvinNotesFromStorage = localStorage.getItem("melvinNotes");
+  // let melvinNotes: Note[] = [];
+
+  // try {
+  //   // if null, means it is a new user or storage was cleared
+  //   // so set storage, else parse the notes list
+  //   if (melvinNotesFromStorage === null) {
+  //     localStorage.setItem("melvinNotes", JSON.stringify([]));
+  //   } else {
+  //     melvinNotes = JSON.parse(melvinNotesFromStorage);
+  //   }
+  // } catch {
+  //   localStorage.clear();
+  //   melvinNotes = [];
+  // }
+
   return (
     <div className="grid grid-cols-3 gap-4 justify-normal">
       {notes.map((note) => (
-        <div
-          key={note.id}
-          className={`items-center border-double border-4 border-primary p-6 rounded-lg whitespace-pre-line break-words ${
-            note.id === activeNote && "border-warning"
-          }`}
-        >
-          <HiStar onClick={() => onMarkImportant(note.id)}
+          <div
+            key={note.id}
+            className={`items-center border-double border-4 border-primary p-6 rounded-lg whitespace-pre-line break-words ${
+              note.id === activeNote && "border-warning"
+            }`}
+          >
+            <HiStar onClick={() => onMarkImportant(note.id)}
           className={`${note.important ? "text-yellow-600" : null}`} />
           <div className="flex flex-row">
             <div className="flex flex-col m-3 ">
@@ -43,8 +74,8 @@ const NoteList = ({ notes, onDeleteNote, activeNote, setActiveNote, onMarkImport
               day: "2-digit",
             })}
           </small>
-        </div>
-      ))}
+          </div>
+        ))}
     </div>
   );
 };

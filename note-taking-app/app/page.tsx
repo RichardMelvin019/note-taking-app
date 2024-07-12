@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import uuid from "react-uuid";
 import Note from "./note/page";
 import NoteList from "./notelist/page";
@@ -14,8 +14,12 @@ interface Notes {
 }
 
 export default function Home() {
-  const [notes, setNotes] = useState<Notes[]>([]);
+  const [notes, setNotes] = useState<Notes[]>(localStorage.notes ? JSON.parse(localStorage.notes) : []);
   const [activeNote, setActiveNote] = useState(null);
+
+  useEffect(() => {
+    localStorage.setItem('notes', JSON.stringify(notes));
+  }, [notes]);
 
   const [newTitle, setNewTitle] = useState("");
   const [newDescription, setNewDescription] = useState("");
