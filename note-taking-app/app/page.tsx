@@ -60,14 +60,15 @@ export default function Home() {
     setNotes(deleteNotes); // Updates the notes array.
   };
 
-  const handleUpdateNote = (id, updatedTitle,
-    updatedDescription, updatedImportant) => {
+  const handleUpdateNote = (id: string, updatedTitle: any,
+    updatedDescription: any, updatedImportant: any) => {
     const updatedNotes = notes.map((note) =>
         note.id === id ? {
             ...note,
             title: updatedTitle,
             description: updatedDescription,
-            important: updatedImportant
+            important: updatedImportant,
+            lastModified: Date.now(),
         }
             : note
     );

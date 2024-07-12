@@ -1,6 +1,7 @@
 "use client";
 
 import { HiStar, HiTrash, HiPencilSquare } from "react-icons/hi2";
+import ReactMarkdown from "react-markdown";
 
 const NoteList = ({
   notes,
@@ -9,10 +10,12 @@ const NoteList = ({
   setActiveNote,
   onMarkImportant,
 }) => {
+
+  const sortedNotes = notes.sort((a, b) => b.lastModified - a.lastModified);
   
   return (
     <div className="grid grid-cols-3 gap-4 justify-normal">
-      {notes.map((note) => (
+      {sortedNotes.map((note) => (
           <div
             key={note.id}
             className={`items-center border-double border-4 border-primary p-6 rounded-lg whitespace-pre-line break-words ${
@@ -24,7 +27,7 @@ const NoteList = ({
           <div className="flex flex-row">
             <div className="flex flex-col m-3 ">
               <strong className="text-balance ">{note.title}</strong>
-              <p className="text-balance font-mono">{note.description}</p>
+              <ReactMarkdown className="text-balance font-mono">{note.description}</ReactMarkdown>
             </div>
             <div className="flex flex-col m-1 ">
               <button
